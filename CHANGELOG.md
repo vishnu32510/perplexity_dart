@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Fixed minor bugs
+
 ## 1.0.0
 
 * Updated http package dependency to ^1.0.0 for better compatibility
