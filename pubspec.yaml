@@ -1,0 +1,23 @@
+name: perplexity_dart
+description: A lightweight Dart SDK to interact with Perplexity.ai's chat
+  completion API (streaming + model switching supported).
+version: 1.0.0
+homepage: https://github.com/vishnu32510/perplexity_dart
+repository: https://github.com/vishnu32510/perplexity_dart
+issue_tracker: https://github.com/vishnu32510/perplexity_dart/issues
+topics:
+  - perplexity
+  - chat
+  - ai
+  - llm
+  - sdk
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  http: ^1.0.0
+
+dev_dependencies:
+  lints: ^3.0.0
+  test: ^1.24.0
