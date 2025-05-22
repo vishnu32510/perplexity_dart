@@ -18,8 +18,19 @@ jobs:
       - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
 
-      - name: Install dependencies
-        run: dart pub get --no-example
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0' # Adjust as needed
+
+      - name: Install Dart package dependencies
+        run: dart pub get
+
+      - name: Validate Flutter example
+        run: |
+          cd example
+          flutter pub get
+          cd ..
 
       - name: Publish to pub.dev
         run: dart pub publish --force --no-example
