@@ -10,5 +10,16 @@ on:
 jobs:
   publish:
     permissions:
-      id-token: write   # Required for OIDC-based publishing
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+      id-token: write # Required for authentication using OIDC
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+      - name: Install dependencies
+        run: dart pub get
+      - name: Format Dart
+        run: dart format .
+      # Here you can insert custom steps you need
+      # - run: dart tool/generate-code.dart
+      - name: Publish
+        run: dart pub publish --force

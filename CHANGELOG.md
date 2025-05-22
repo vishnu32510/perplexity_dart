@@ -1,5 +1,9 @@
 ## 1.0.3
 
+* Update readme and cleanup
+
+## 1.0.3
+
 * Example Update
 
 ## 1.0.2

@@ -8,16 +8,16 @@ It supports both streaming and non-streaming responses, flexible model switching
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔁 Streamed and full chat completion support
-- 🎯 Switch between models with known context lengths
-- 💬 Chat roles: `system`, `user`, `assistant`, `tool`
-- 🖼️ *Coming soon:* Image input via base64 or HTTPS URL
+- Streamed and full chat completion support
+- Switch between models with known context lengths
+- Chat roles: `system`, `user`, `assistant`, `tool`
+- *Coming soon:* Image input via base64 or HTTPS URL
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 Add the SDK to your project:
 
@@ -26,7 +26,7 @@ dependencies:
   perplexity_dart: 
 ```
 
-## 🔌 Direct API Usage
+## Direct API Usage
 
 For more control, you can use the `PerplexityClient` directly:
 
@@ -75,7 +75,7 @@ void main() async {
 }
 ```
 
-## 📋 Available Models
+## Available Models
 
 The SDK supports all current Perplexity models with their context lengths:
 
@@ -109,7 +109,7 @@ final requestModel = ChatRequestModel(
 
 <a href="https://buymeacoffee.com/vishnu3251p" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-blue.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
