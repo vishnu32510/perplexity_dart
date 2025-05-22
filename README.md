@@ -23,7 +23,7 @@ Add the SDK to your project:
 
 ```yaml
 dependencies:
-  perplexity_dart: ^1.0.1
+  perplexity_dart: 
 ```
 
 ## 🔌 Direct API Usage
