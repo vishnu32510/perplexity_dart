@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:perplexity_dart/perplexity_dart.dart';
 import 'package:dotenv/dotenv.dart' as dotenv;
 
-
 Future<void> main() async {
   final env = dotenv.DotEnv()..load();
 
