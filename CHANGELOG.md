@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Github Actions addition
+
 ## 1.0.1
 
 * Fixed minor bugs
