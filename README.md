@@ -6,6 +6,8 @@
 **Perplexity Dart SDK** is a lightweight and type-safe Dart client for interacting with [Perplexity.ai](https://www.perplexity.ai)'s `chat/completions` API.  
 It supports both streaming and non-streaming responses, flexible model switching (e.g., `sonar`, `sonar-pro`, etc.), and is designed to work with Flutter apps.
 
+This package also support [perplexity_flutter](https://pub.dev/packages/perplexity_flutter)
+
 ---
 
 ## Features
@@ -13,7 +15,7 @@ It supports both streaming and non-streaming responses, flexible model switching
 - Streamed and full chat completion support
 - Switch between models with known context lengths
 - Chat roles: `system`, `user`, `assistant`, `tool`
-- *Coming soon:* Image input via base64 or HTTPS URL
+- **Image input**: send images as base64 or URL directly alongside text 
 
 ---
 
@@ -40,11 +42,11 @@ void main() async {
   
   // Create messages
   final messages = [
-    MessageModel(
+    StandardMessageModel(
       role: MessageRole.system,
       content: 'Be precise and concise.',
     ),
-    MessageModel(
+    StandardMessageModel(
       role: MessageRole.user,
       content: 'Hello, how are you?',
     ),
@@ -72,6 +74,33 @@ void main() async {
   await for (final chunk in stream) {
     print(chunk);
   }
+
+  import 'dart:convert';
+  import 'dart:io';
+
+  // Send Image from Local  in base64.
+  final bytes = File('/path/to/photo.png').readAsBytesSync();
+  final base64Image = base64Encode(bytes);
+  final dataUri = 'data:image/png;base64,$base64Image';
+
+  final req = ChatRequestModel.defaultImageRequest(
+    url: dataUri,
+    systemPrompt: 'Describe this image.',
+    imagePrompt: 'What’s happening here?',
+  );
+
+
+  // Send Image as Image URL
+  final request = ChatRequestModel.defaultImageRequest(
+    url: ['https://example.com/photo.png, data:image/png;base64,iVBORw0KGgoAAAANSUhEUgA...'],
+    systemPrompt: 'You are an expert image analyst.',
+    imagePrompt: 'Describe what you see here.',
+    stream: false,
+    model: PerplexityModel.sonarPro,
+  );
+
+  final response = await client.sendMessage(requestModel: request);
+  print(response.content);
 }
 ```
 

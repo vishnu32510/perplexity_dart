@@ -75,20 +75,68 @@ class ChatRequestModel {
   /// [model] specifies which model to use (defaults to sonar).
   factory ChatRequestModel.defaultRequest({
     required String prompt,
+    String? systemPrompt,
     bool? stream,
     PerplexityModel? model,
+    int? topk,
+    Map<String, dynamic>? responseFormat
   }) {
     return ChatRequestModel(
+      responseFormat: responseFormat,
+      stream: stream ?? true,
+      model: model ?? PerplexityModel.sonar,
+      topK: topk,
+      messages: [
+        StandardMessageModel(
+          role: MessageRole.system,
+          content: systemPrompt?? 'Be precise and concise.',
+        ),
+        StandardMessageModel(
+          role: MessageRole.user,
+          content: prompt,
+        ),
+      ],
+    );
+  }
+  /// Creates a chat request that includes an image.
+  ///
+  /// [url] is the HTTP or data-URI of the image.
+  /// [systemPrompt] is an optional system instruction.
+  /// [imagePrompt] is an optional text prompt describing what to do with the image.
+  /// [stream] toggles streaming responses.
+  /// [model] selects which Perplexity model to use.
+  factory ChatRequestModel.defaultImageRequest({
+    required List<String> urlList,
+    String? systemPrompt,
+    String? imagePrompt,
+    bool? stream,
+    int? topk,
+    PerplexityModel? model,
+    Map<String, dynamic>? responseFormat
+  }) {
+    /// Create a list of ImagePart objects from the urlList
+    List<MessagePart> contentParts = [
+      TextPart(text: imagePrompt ?? 'Extract Details From Image'),
+    ];
+    
+    /// Add each URL as an ImagePart
+    for (String url in urlList) {
+      contentParts.add(ImagePart(url: url));
+    }
+    
+    return ChatRequestModel(
+      responseFormat: responseFormat,
+      topK: topk,
       stream: stream ?? true,
       model: model ?? PerplexityModel.sonar,
       messages: [
-        MessageModel(
+        StandardMessageModel(
           role: MessageRole.system,
-          content: 'Be precise and concise.',
+          content: systemPrompt ?? 'Be precise and concise.',
         ),
-        MessageModel(
+        ImageMessageModel(
           role: MessageRole.user,
-          content: prompt,
+          content: contentParts,
         ),
       ],
     );

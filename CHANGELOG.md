@@ -1,3 +1,13 @@
+## 1.0.5
+
+* Added image‐sending support via mix of  text & image payloads
+* Added `defaultImageRequest` for ease of use
+* Exposed `systemPrompt` parameter on the default `ChatRequestModel` factory
+* Updated documentation & examples for image‐based requests
+* Added support for multiple images in a single request
+* Added support for `response_format` parameter
+* Added support for `top_k` parameter
+
 ## 1.0.4
 
 * Update readme and cleanup
