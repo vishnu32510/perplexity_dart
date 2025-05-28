@@ -73,14 +73,13 @@ class ChatRequestModel {
   /// [prompt] is the user's input text.
   /// [stream] determines whether to stream the response (defaults to true).
   /// [model] specifies which model to use (defaults to sonar).
-  factory ChatRequestModel.defaultRequest({
-    required String prompt,
-    String? systemPrompt,
-    bool? stream,
-    PerplexityModel? model,
-    int? topk,
-    Map<String, dynamic>? responseFormat
-  }) {
+  factory ChatRequestModel.defaultRequest(
+      {required String prompt,
+      String? systemPrompt,
+      bool? stream,
+      PerplexityModel? model,
+      int? topk,
+      Map<String, dynamic>? responseFormat}) {
     return ChatRequestModel(
       responseFormat: responseFormat,
       stream: stream ?? true,
@@ -89,7 +88,7 @@ class ChatRequestModel {
       messages: [
         StandardMessageModel(
           role: MessageRole.system,
-          content: systemPrompt?? 'Be precise and concise.',
+          content: systemPrompt ?? 'Be precise and concise.',
         ),
         StandardMessageModel(
           role: MessageRole.user,
@@ -98,6 +97,7 @@ class ChatRequestModel {
       ],
     );
   }
+
   /// Creates a chat request that includes an image.
   ///
   /// [url] is the HTTP or data-URI of the image.
@@ -105,25 +105,24 @@ class ChatRequestModel {
   /// [imagePrompt] is an optional text prompt describing what to do with the image.
   /// [stream] toggles streaming responses.
   /// [model] selects which Perplexity model to use.
-  factory ChatRequestModel.defaultImageRequest({
-    required List<String> urlList,
-    String? systemPrompt,
-    String? imagePrompt,
-    bool? stream,
-    int? topk,
-    PerplexityModel? model,
-    Map<String, dynamic>? responseFormat
-  }) {
+  factory ChatRequestModel.defaultImageRequest(
+      {required List<String> urlList,
+      String? systemPrompt,
+      String? imagePrompt,
+      bool? stream,
+      int? topk,
+      PerplexityModel? model,
+      Map<String, dynamic>? responseFormat}) {
     /// Create a list of ImagePart objects from the urlList
     List<MessagePart> contentParts = [
       TextPart(text: imagePrompt ?? 'Extract Details From Image'),
     ];
-    
+
     /// Add each URL as an ImagePart
     for (String url in urlList) {
       contentParts.add(ImagePart(url: url));
     }
-    
+
     return ChatRequestModel(
       responseFormat: responseFormat,
       topK: topk,

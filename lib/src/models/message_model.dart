@@ -26,7 +26,7 @@ class StandardMessageModel extends MessageModel {
   /// Creates a new text message.
   ///
   /// - [role]: the sender’s role in the conversation.
-/// - [content]: the textual content.
+  /// - [content]: the textual content.
   StandardMessageModel({
     required this.role,
     required this.content,
@@ -63,7 +63,7 @@ class ImageMessageModel extends MessageModel {
   /// Creates a mixed text+image message.
   ///
   /// - [role]: the sender’s role.
-/// - [content]: a list of [TextPart] and/or [ImagePart].
+  /// - [content]: a list of [TextPart] and/or [ImagePart].
   ImageMessageModel({
     required this.role,
     required this.content,
@@ -120,7 +120,7 @@ class ImagePart extends MessagePart {
   final String url;
 
   /// Creates a new image segment.
-/// - [url]: the image URI (e.g. data:image/png;base64,… or https://…).
+  /// - [url]: the image URI (e.g. data:image/png;base64,… or https://…).
   ImagePart({required this.url});
 
   @override

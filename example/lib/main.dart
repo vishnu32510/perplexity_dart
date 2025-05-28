@@ -15,7 +15,8 @@ Future<void> main() async {
 
   print('Welcome to Perplexity CLI Chat');
   print('Type `exit` to quit, or `!img <path-or-URL>` to send an image.');
-  print('For multiple images, separate paths/URLs with commas: `!img path1.jpg,https://example.com/img.png`\n');
+  print(
+      'For multiple images, separate paths/URLs with commas: `!img path1.jpg,https://example.com/img.png`\n');
 
   while (true) {
     stdout.write('> ');
@@ -25,7 +26,7 @@ Future<void> main() async {
     if (line.startsWith('!img ')) {
       final targets = line.substring(5).trim().split(',');
       List<String> uris = [];
-      
+
       for (final target in targets) {
         final trimmedTarget = target.trim();
         if (trimmedTarget.startsWith('http')) {
@@ -36,7 +37,8 @@ Future<void> main() async {
           try {
             final bytes = File(trimmedTarget).readAsBytesSync();
             final ext = trimmedTarget.split('.').last.toLowerCase();
-            final mime = ext == 'jpg' || ext == 'jpeg' ? 'image/jpeg' : 'image/png';
+            final mime =
+                ext == 'jpg' || ext == 'jpeg' ? 'image/jpeg' : 'image/png';
             uris.add('data:$mime;base64,${base64Encode(bytes)}');
           } catch (e) {
             print('Error processing file $trimmedTarget: $e');
@@ -44,7 +46,7 @@ Future<void> main() async {
           }
         }
       }
-      
+
       if (uris.isEmpty) {
         print('No valid images found. Please try again.');
         continue;
@@ -68,7 +70,6 @@ Future<void> main() async {
       } catch (e) {
         print('Image request failed: $e\n');
       }
-
     } else {
       stdout.write('Stream? (y/n): ');
       final stream = stdin.readLineSync()?.toLowerCase() == 'y';
